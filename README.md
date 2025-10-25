@@ -2,6 +2,14 @@
 
 Demo estática del proyecto completo [Buffet Letters](https://github.com/agarnung/buffet-letters).
 
+> [!IMPORTANT]
+>
+> Si te gusta el proyecto, te animo a colaborar.
+>
+> Este proyecto está financiado con [BuyMeACoffee ☕](https://buymeacoffee.com/agarnung).
+>
+> En [este post](https://buymeacoffee.com/agarnung/proyecto-abierto-buffet-letters) se muestran las metas para seguir mejorando este proyecto y hacerlo más accesible y fácil de usar.
+
 ## 🚀 Comandos
 
 ```bash
