@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
+import remarkGfm from 'remark-gfm'
 import { HashRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom'
 import ChatInterface from './components/ChatInterface.tsx'
+
+type MarkdownComponentProps = { children: ReactNode }
 
 type Letter = {
   id: string
@@ -12,17 +16,18 @@ type Letter = {
   onlineUrl: string
 }
 
-// Función para generar las cartas
+// Función para generar las cartas basada en los archivos existentes
 function generateLettersFromFiles(): Letter[] {
   const letters: Letter[] = []
   
+  // Años desde 1977 hasta 2024
   for (let year = 1977; year <= 2024; year++) {
     letters.push({
       id: `letter-${year}`,
       year: year,
       title: `Carta a los Accionistas ${year}`,
       summary: `Carta anual de Warren Buffett a los accionistas de Berkshire Hathaway del año ${year}.`,
-      downloadUrl: `#`,
+      downloadUrl: `/api/download/${year}`, 
       onlineUrl: `/buffet-letters-demo/letters/es/${year}.md`
     })
   }
@@ -56,6 +61,141 @@ function TabButton({ active, onClick, children }: { active: boolean; onClick: ()
   )
 }
 
+// Componente mejorado para renderizar markdown con estilos inline
+export function EnhancedMarkdownRenderer({ markdown }: { markdown: string }) {
+  const [ReactMarkdown, setRM] = useState<any>(null)
+
+  useEffect(() => {
+    import('react-markdown').then(mod => {
+      setRM(() => mod.default)
+    })
+  }, [])
+
+  if (!ReactMarkdown) {
+    return (
+      <div style={{ whiteSpace: 'pre-wrap', color: '#065f46', lineHeight: '1.6' }}>
+        {markdown}
+      </div>
+    )
+  }
+
+  return (
+    <div className="markdown-content">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          h1: ({ children }: MarkdownComponentProps) => (
+            <h1 style={{
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              margin: '1.5rem 0 1rem 0',
+              color: '#064e3b'
+            }}>{children}</h1>
+          ),
+          h2: ({ children }: MarkdownComponentProps) => (
+            <h2 style={{
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              margin: '1.25rem 0 0.75rem 0',
+              color: '#064e3b'
+            }}>{children}</h2>
+          ),
+          h3: ({ children }: MarkdownComponentProps) => (
+            <h3 style={{
+              fontSize: '1.125rem',
+              fontWeight: '600',
+              margin: '1rem 0 0.5rem 0',
+              color: '#064e3b'
+            }}>{children}</h3>
+          ),
+          p: ({ children }: MarkdownComponentProps) => (
+            <p style={{
+              marginBottom: '1rem',
+              lineHeight: '1.6',
+              color: '#065f46'
+            }}>{children}</p>
+          ),
+          ul: ({ children }: MarkdownComponentProps) => (
+            <ul style={{
+              marginBottom: '1rem',
+              paddingLeft: '1.5rem',
+              color: '#065f46'
+            }}>{children}</ul>
+          ),
+          ol: ({ children }: MarkdownComponentProps) => (
+            <ol style={{
+              marginBottom: '1rem',
+              paddingLeft: '1.5rem',
+              color: '#065f46'
+            }}>{children}</ol>
+          ),
+          li: ({ children }: MarkdownComponentProps) => (
+            <li style={{
+              marginBottom: '0.25rem',
+              color: '#065f46'
+            }}>{children}</li>
+          ),
+          strong: ({ children }: MarkdownComponentProps) => (
+            <strong style={{
+              fontWeight: '600',
+              color: '#064e3b'
+            }}>{children}</strong>
+          ),
+          em: ({ children }: MarkdownComponentProps) => (
+            <em style={{
+              fontStyle: 'italic',
+              color: '#065f46'
+            }}>{children}</em>
+          ),
+          blockquote: ({ children }: MarkdownComponentProps) => (
+            <blockquote style={{
+              borderLeft: '4px solid #a7f3d0',
+              paddingLeft: '1rem',
+              margin: '1rem 0',
+              fontStyle: 'italic',
+              color: '#047857'
+            }}>{children}</blockquote>
+          ),
+          table: ({ children }: MarkdownComponentProps) => (
+            <div style={{ overflowX: 'auto', margin: '1.5rem 0' }}>
+              <table style={{
+                minWidth: '100%',
+                borderCollapse: 'collapse',
+                border: '1px solid #a7f3d0'
+              }}>{children}</table>
+            </div>
+          ),
+          th: ({ children }: MarkdownComponentProps) => (
+            <th style={{
+              border: '1px solid #a7f3d0',
+              padding: '8px 16px',
+              background: '#ecfdf5',
+              fontWeight: '600',
+              color: '#064e3b',
+              textAlign: 'left'
+            }}>{children}</th>
+          ),
+          td: ({ children }: MarkdownComponentProps) => (
+            <td style={{
+              border: '1px solid #a7f3d0',
+              padding: '8px 16px',
+              color: '#065f46'
+            }}>{children}</td>
+          ),
+          a: ({ href, children }: { href?: string; children: ReactNode }) => (
+            <a href={href} style={{
+              color: '#2563eb',
+              textDecoration: 'underline'
+            }}>{children}</a>
+          ),
+        }}
+      >
+        {markdown}
+      </ReactMarkdown>
+    </div>
+  )
+}
+
 function DocumentCard({ letter }: { letter: Letter }) {
   const navigate = useNavigate()
   
@@ -65,6 +205,7 @@ function DocumentCard({ letter }: { letter: Letter }) {
 
   const handleDownload = (e: React.MouseEvent) => {
     e.preventDefault()
+    // En demo, redirigir al proyecto completo
     window.open('https://github.com/agarnung/buffet-letters', '_blank')
   }
 
@@ -188,9 +329,9 @@ function HomePage() {
           id: it.id,
           year: it.year,
           title: it.title,
-          summary: it.summary || `Carta anual de Warren Buffett...`,
+          summary: it.summary || `Carta anual de Warren Buffett a los accionistas de Berkshire Hathaway del año ${it.year}.`,
           description: it.description,
-          downloadUrl: '#',
+          downloadUrl: `/api/download/${it.year}`,
           onlineUrl: it.path
         }))
         setLetters(mapped)
@@ -229,30 +370,55 @@ function HomePage() {
               margin: 0
             }}>Cartas de Warren Buffett (ES) - DEMO</h1>
           </div>
-          <a
-            href="https://github.com/agarnung/buffet-letters"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              borderRadius: '6px',
-              background: '#4b5563',
-              color: 'white',
-              padding: '6px 12px',
-              fontSize: '12px',
-              textDecoration: 'none',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.background = '#374151'}
-            onMouseOut={(e) => e.currentTarget.style.background = '#4b5563'}
-          >
-            <svg style={{ height: '16px', width: '16px' }} fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            Proyecto Completo
-          </a>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <a
+              href="https://github.com/agarnung/buffet-letters"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                borderRadius: '6px',
+                background: '#4b5563',
+                color: 'white',
+                padding: '6px 12px',
+                fontSize: '12px',
+                textDecoration: 'none',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.background = '#374151'}
+              onMouseOut={(e) => e.currentTarget.style.background = '#4b5563'}
+            >
+              <svg style={{ height: '16px', width: '16px' }} fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              Proyecto Completo
+            </a>
+            <a
+              href="https://buymeacoffee.com/agarnung"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                borderRadius: '6px',
+                background: '#f59e0b',
+                color: 'white',
+                padding: '6px 12px',
+                fontSize: '12px',
+                textDecoration: 'none',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                fontWeight: '500'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.background = '#d97706'}
+              onMouseOut={(e) => e.currentTarget.style.background = '#f59e0b'}
+            >
+              <span style={{ fontSize: '14px' }}>☕</span>
+              Invítame a un café
+            </a>
+          </div>
         </div>
       </header>
       
@@ -463,13 +629,7 @@ function LetterView() {
           
           {!loading && (
             <div style={{ padding: '24px' }}>
-              <div style={{
-                color: '#065f46',
-                lineHeight: '1.6',
-                fontSize: '14px'
-              }}>
-                <div style={{ whiteSpace: 'pre-wrap' }}>{content}</div>
-              </div>
+              <EnhancedMarkdownRenderer markdown={content} />
             </div>
           )}
         </div>
