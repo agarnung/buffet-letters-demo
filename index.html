@@ -4,17 +4,71 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/buffet-letters-demo/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>buffet-letters-frontend</title>
-    <!-- <style>
+    <title>Cartas de Warren Buffett - Demo</title>
+    
+    <!-- ESTILOS CRÍTICOS PARA EVITAR FOUC -->
+    <style>
+      /* Ocultar todo hasta que cargue Tailwind */
       body {
-        zoom: 1.75;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
       }
-    </style> -->
-    <script type="module" crossorigin src="/buffet-letters-demo/assets/index-0bdf60af.js"></script>
-    <link rel="stylesheet" href="/buffet-letters-demo/assets/index-0968d8b8.css">
+      
+      body.loaded {
+        visibility: visible;
+        opacity: 1;
+      }
+      
+      /* Estilos mínimos críticos */
+      #root {
+        min-height: 100vh;
+      }
+      
+      /* Loading state básico */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ecfdf5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+    </style>
+    <script type="module" crossorigin src="/buffet-letters-demo/assets/index-4e2e17ce.js"></script>
+    <link rel="stylesheet" href="/buffet-letters-demo/assets/index-d0f09ccf.css">
   </head>
   <body>
+    <!-- Loading state -->
+    <div id="loading" class="loading">
+      <div style="text-align: center;">
+        <div style="font-size: 1.5rem; color: #065f46; margin-bottom: 1rem;">📈</div>
+        <div style="color: #065f46; font-weight: 500;">Cargando Cartas de Warren Buffett...</div>
+      </div>
+    </div>
+    
     <div id="root"></div>
     
+    
+    <!-- Script para manejar la carga -->
+    <script>
+      // Mostrar contenido cuando todo esté cargado
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.getElementById('loading').style.display = 'none';
+          document.body.classList.add('loaded');
+        }, 100);
+      });
+      
+      // Fallback por si hay errores
+      setTimeout(function() {
+        document.getElementById('loading').style.display = 'none';
+        document.body.classList.add('loaded');
+      }, 3000);
+    </script>
   </body>
 </html>
