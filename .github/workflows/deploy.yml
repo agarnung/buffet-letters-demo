@@ -27,7 +27,18 @@ jobs:
         run: npm ci
         
       - name: Build
-        run: npm run build
+        run: |
+          npm run build
+          echo "=== Build completed ==="
+          ls -la dist/
+        
+      # DEBUG: Ver archivos generados
+      - name: Debug build output
+        run: |
+          echo "=== dist/ contents ==="
+          find dist/ -type f -name "*.html" -o -name "*.js" -o -name "*.css" | head -20
+          echo "=== index.html ==="
+          cat dist/index.html | head -10
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
