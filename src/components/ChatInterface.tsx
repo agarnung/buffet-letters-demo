@@ -1,15 +1,47 @@
 export default function ChatInterface() {
   return (
-    <div className="flex flex-col h-[600px] bg-white rounded-lg border border-emerald-200 shadow-lg">
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '600px',
+      background: 'white',
+      borderRadius: '8px',
+      border: '1px solid #d1fae5',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+    }}>
       {/* Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 px-4 py-3 border-b border-emerald-200">
-        <div className="flex items-center justify-between">
+      <div style={{
+        background: 'linear-gradient(to right, #059669, #047857)',
+        padding: '12px 16px',
+        borderBottom: '1px solid #d1fae5'
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
           <div>
-            <h3 className="font-bold text-white text-lg">Consultar a Warren Buffett</h3>
-            <p className="text-sm text-emerald-100">Basado en sus cartas a los accionistas (1977-2024)</p>
+            <h3 style={{
+              fontWeight: 'bold',
+              color: 'white',
+              fontSize: '18px',
+              margin: '0 0 4px 0'
+            }}>Consultar a Warren Buffett</h3>
+            <p style={{
+              fontSize: '12px',
+              color: '#d1fae5',
+              margin: 0
+            }}>Basado en sus cartas a los accionistas (1977-2024)</p>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              padding: '4px 12px',
+              borderRadius: '9999px',
+              fontSize: '12px',
+              fontWeight: '500',
+              background: '#fef3c7',
+              color: '#92400e'
+            }}>
               🔄 Versión Demo
             </div>
           </div>
@@ -17,21 +49,52 @@ export default function ChatInterface() {
       </div>
 
       {/* Messages Area - Placeholder */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-        <div className="text-center text-emerald-700 py-12">
-          <div className="text-4xl mb-4">🤖</div>
-          <p className="font-semibold text-lg mb-4">Chat con IA - Versión Demo</p>
-          <p className="text-sm mb-6 text-emerald-600 max-w-md mx-auto">
+      <div style={{
+        flex: 1,
+        overflowY: 'auto',
+        padding: '16px',
+        background: '#f9fafb',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ textAlign: 'center', color: '#047857', padding: '48px 0' }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>🤖</div>
+          <p style={{ 
+            fontWeight: '600', 
+            fontSize: '18px', 
+            marginBottom: '16px',
+            marginTop: 0
+          }}>Chat con IA - Versión Demo</p>
+          <p style={{
+            fontSize: '12px',
+            marginBottom: '24px',
+            color: '#065f46',
+            maxWidth: '400px',
+            margin: '0 auto 24px auto'
+          }}>
             Esta funcionalidad de chat con inteligencia artificial está disponible en la versión completa del proyecto, 
             donde puedes hacer preguntas sobre las cartas y recibir respuestas basadas en el contenido real.
           </p>
           
-          <div className="space-y-3 max-w-sm mx-auto">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '300px', margin: '0 auto' }}>
             <a 
               href="https://github.com/agarnung/buffet-letters" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium"
+              style={{
+                display: 'block',
+                width: '100%',
+                background: '#2563eb',
+                color: 'white',
+                padding: '12px 16px',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                fontWeight: '500',
+                textAlign: 'center'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.background = '#1d4ed8'}
+              onMouseOut={(e) => e.currentTarget.style.background = '#2563eb'}
             >
               🚀 Visitar Proyecto Completo
             </a>
@@ -39,42 +102,93 @@ export default function ChatInterface() {
               href="https://github.com/agarnung/buffet-letters/fork" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block w-full border border-emerald-300 text-emerald-700 py-3 px-4 rounded-md hover:bg-emerald-50 transition-colors font-medium"
+              style={{
+                display: 'block',
+                width: '100%',
+                border: '1px solid #d1fae5',
+                color: '#064e3b',
+                padding: '12px 16px',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                fontWeight: '500',
+                textAlign: 'center',
+                background: 'white'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.background = '#ecfdf5'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'white'}
             >
               📝 Colaborar en GitHub
             </a>
           </div>
 
-          <div className="mt-8 text-xs text-emerald-500 space-y-1">
-            <p>💡 <strong>En la versión completa:</strong></p>
-            <p>• Pregunta sobre inversiones, valor intrínseco, negocios</p>
-            <p>• Respuestas basadas en las cartas reales de Buffett</p>
-            <p>• Múltiples modelos de IA disponibles</p>
-            <p>• Fuentes citadas de las cartas consultadas</p>
+          <div style={{ 
+            marginTop: '32px', 
+            fontSize: '12px', 
+            color: '#047857',
+            textAlign: 'left',
+            maxWidth: '300px',
+            margin: '32px auto 0 auto'
+          }}>
+            <p style={{ margin: '0 0 8px 0' }}>💡 <strong>En la versión completa:</strong></p>
+            <p style={{ margin: '2px 0' }}>• Pregunta sobre inversiones, valor intrínseco, negocios</p>
+            <p style={{ margin: '2px 0' }}>• Respuestas basadas en las cartas reales de Buffett</p>
+            <p style={{ margin: '2px 0' }}>• Múltiples modelos de IA disponibles</p>
+            <p style={{ margin: '2px 0' }}>• Fuentes citadas de las cartas consultadas</p>
           </div>
         </div>
       </div>
 
       {/* Input Area - Disabled */}
-      <div className="border-t border-emerald-200 p-4 bg-white">
-        <div className="flex space-x-3">
-          <div className="flex-1">
+      <div style={{
+        borderTop: '1px solid #d1fae5',
+        padding: '16px',
+        background: 'white'
+      }}>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ flex: 1 }}>
             <textarea
               placeholder="Esta funcionalidad está disponible en el proyecto completo..."
-              className="w-full border border-emerald-300 rounded-xl px-4 py-3 bg-gray-100 text-gray-500 cursor-not-allowed resize-none"
+              style={{
+                width: '100%',
+                border: '1px solid #d1fae5',
+                borderRadius: '12px',
+                padding: '12px 16px',
+                background: '#f3f4f6',
+                color: '#6b7280',
+                cursor: 'not-allowed',
+                resize: 'none',
+                fontFamily: 'inherit',
+                fontSize: '14px'
+              }}
               rows={2}
               disabled
             />
-            <div className="text-xs text-gray-500 mt-1">
+            <div style={{
+              fontSize: '12px',
+              color: '#6b7280',
+              marginTop: '4px'
+            }}>
               ⚠️ Chat deshabilitado en versión demo
             </div>
           </div>
           <button
             disabled
-            className="bg-gray-400 text-white px-6 py-3 rounded-xl font-medium cursor-not-allowed self-end flex items-center space-x-2"
+            style={{
+              background: '#9ca3af',
+              color: 'white',
+              padding: '12px 24px',
+              borderRadius: '12px',
+              fontWeight: '500',
+              cursor: 'not-allowed',
+              border: 'none',
+              alignSelf: 'flex-end',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
           >
             <span>Enviar</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style={{ width: '16px', height: '16px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
           </button>
