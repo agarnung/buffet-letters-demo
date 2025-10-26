@@ -99,7 +99,7 @@ export default function ChatInterface() {
               🚀 Visitar Proyecto Completo
             </a>
             <a 
-              href="https://github.com/agarnung/buffet-letters/fork" 
+              href="https://buymeacoffee.com/agarnung/proyecto-abierto-buffet-letters" 
               target="_blank" 
               rel="noopener noreferrer"
               style={{
@@ -117,7 +117,7 @@ export default function ChatInterface() {
               onMouseOver={(e) => e.currentTarget.style.background = '#ecfdf5'}
               onMouseOut={(e) => e.currentTarget.style.background = 'white'}
             >
-              📝 Colaborar en GitHub
+              📝 Colaborar en el proyecto
             </a>
           </div>
 
