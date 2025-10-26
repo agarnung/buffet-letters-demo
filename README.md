@@ -10,6 +10,29 @@ Demo estática del proyecto completo [Buffet Letters](https://github.com/agarnun
 >
 > En [este post](https://buymeacoffee.com/agarnung/proyecto-abierto-buffet-letters) se muestran las metas para seguir mejorando este proyecto y hacerlo más accesible y fácil de usar.
 
+Vídeo de prueba y capturas del **sistema completo**:
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="./assets/buffet%20letters%20idea.png" width="512" height="256" />
+    </td>
+    <td align="center">
+      <img src="./assets/buffet%20letters%20idea%201.png" width="512" height="256" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./assets/buffet%20letters%20idea%202.png" width="512" height="256" />
+    </td>
+    <td align="center">
+      <img src="./assets/buffet%20letters%20idea%203.jpeg" width="512" height="256" />
+    </td>
+  </tr>
+</table>
+
+[PLACEHOLDER VÍDEO]
+
 ## 🚀 Comandos
 
 ```bash
