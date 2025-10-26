@@ -31,7 +31,7 @@ Vídeo de prueba y capturas del **sistema completo**:
   </tr>
 </table>
 
-[PLACEHOLDER VÍDEO]
+# [PLACEHOLDER VÍDEO]
 
 ## 🚀 Comandos
 
