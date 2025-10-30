@@ -1,6 +1,8 @@
 # Demo Web - Cartas de Warren Buffett
 
-Demo estática del proyecto completo [Buffet Letters](https://github.com/agarnung/buffet-letters).
+Demo estática del [proyecto completo](https://buymeacoffee.com/agarnung/proyecto-abierto-buffet-letters).
+
+Proyecto completo **próximamente disponible**: [Buffet Letters](https://github.com/agarnung/buffet-letters).
 
 > [!IMPORTANT]
 >
