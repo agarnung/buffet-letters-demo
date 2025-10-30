@@ -31,7 +31,9 @@ Vídeo de prueba y capturas del **sistema completo**:
   </tr>
 </table>
 
-# [PLACEHOLDER VÍDEO]
+https://github.com/user-attachments/assets/dcac044c-b25d-4935-ac51-eb32d5ca8b6b
+
+https://github.com/user-attachments/assets/80341a86-c111-469f-9cba-3de9c6a8740b
 
 ## 🚀 Comandos
 
