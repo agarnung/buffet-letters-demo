@@ -35,7 +35,18 @@ https://github.com/user-attachments/assets/dcac044c-b25d-4935-ac51-eb32d5ca8b6b
 
 https://github.com/user-attachments/assets/80341a86-c111-469f-9cba-3de9c6a8740b
 
-## 🚀 Comandos
+## 🌟 Características
+
+* Visor de documentos con renderizado Markdown
+* Placeholder de chat interactiva  
+* Diseño adaptable (responsive)
+* Interfaz en español
+
+El frontend muestra las **cartas a los accionistas de Warren Buffett** en español, con una interfaz limpia y fácil de leer.
+
+**Proyecto completo**: https://github.com/agarnung/buffet-letters
+
+## 🚀 Comandos (para desarrolladores)
 
 ```bash
 # Instalar dependencias
@@ -50,14 +61,3 @@ npm run build
 # Previsualizar build (http://localhost:4173)
 npm run preview
 ```
-
-## 🌟 Características
-
-* Visor de documentos con renderizado Markdown
-* Placeholder de chat interactiva  
-* Diseño adaptable (responsive)
-* Interfaz en español
-
-El frontend muestra las **cartas a los accionistas de Warren Buffett** en español, con una interfaz limpia y fácil de leer.
-
-**Proyecto completo**: https://github.com/agarnung/buffet-letters
